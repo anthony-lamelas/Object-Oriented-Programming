@@ -1,6 +1,6 @@
-# include<fstreaam>
-# include<string>
-#include<vector>
-#include<iostream>
+#include <fstream>
+# include <string>
+#include <vector>
+#include <iostream>
 
 using namespace std;
