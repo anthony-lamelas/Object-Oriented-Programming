@@ -1,9 +1,9 @@
 /*
-hw01.cpp
 Anthony Lamelas
-Completed September 9, 2024
+hw01.cpp
+September 9, 2024
 CS2124 24F
-Decrypts text encoded with Casesar's cypher 
+Decrypts text encoded with Casesar cypher 
 */
 
 #include <fstream>
@@ -49,7 +49,7 @@ int main() {
 
     //Iterates through the file and saves each line into a vector
     string line;
-    vector<string> lines;
+    vector <string> lines;
     while (getline(encrypted, line)) {
         lines.push_back(line);
     }
