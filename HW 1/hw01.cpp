@@ -17,6 +17,11 @@ using namespace std;
 //Returns decrypted character given the encrypted character and rotation distance
 //Only works for uppercase characters
 char decryptChar(char& letter, int distance) {
+    if (distance >= 26) {
+        distance %= 26;
+    }
+
+
     if (letter >= 'A' and letter <= 'Z') {
         letter -= distance;
       if (letter < 'A') {
