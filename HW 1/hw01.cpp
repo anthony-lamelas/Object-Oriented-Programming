@@ -21,7 +21,6 @@ char decryptChar(char& letter, int distance) {
         distance %= 26;
     }
 
-
     if (letter >= 'A' and letter <= 'Z') {
         letter -= distance;
       if (letter < 'A') {
