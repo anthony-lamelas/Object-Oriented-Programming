@@ -8,7 +8,7 @@ Simulates battles determined by strength between warriors
 
 #include <iostream>
 #include <vector>
-#include <string.h>
+#include <string>
 #include <utility>
 #include <fstream>
 using namespace std;
