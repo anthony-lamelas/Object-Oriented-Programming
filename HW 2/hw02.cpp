@@ -26,7 +26,7 @@ struct WarriorList{
 
 // Function Prototypes
 void battle(Warrior& Warrior1, Warrior& Warrior2);
-void status(vector<Warrior>& Warriors);
+void status(const vector<Warrior>& Warriors);
 void run_file(fstream& warriors_file);
 
 // Main 
@@ -78,7 +78,7 @@ void battle(Warrior& Warrior1, Warrior& Warrior2){
 }
 
 // Status command displays how many warriors and their amount of strength
-void status(vector<Warrior>& Warriors){
+void status(const vector<Warrior>& Warriors){
     size_t amount_warriors = Warriors.size();
     cout << "There are: " << amount_warriors << " warriors" << endl;
 
