@@ -38,7 +38,8 @@ int main(){
 // Battle function that takes in two warriors
 void battle(Warrior& Warrior1, Warrior& Warrior2){
     if (Warrior1.name.empty() || Warrior2.name.empty()){
-        cerr << "Error: At least one of the warriors is not initialized." << endl;
+        cerr << "Error: At least one of the warriors is not initialized." 
+        << endl;
     }
     else {
          cout << Warrior1.name << " battles " << Warrior2.name << endl;
@@ -71,7 +72,8 @@ void battle(Warrior& Warrior1, Warrior& Warrior2){
         } else {  
             Warrior1.strength = 0;
             Warrior2.strength = 0;
-            cout << "Mutual Annihilation: " << Warrior1.name << " and " << Warrior2.name  
+            cout << "Mutual Annihilation: " << Warrior1.name << " and "
+             << Warrior2.name  
                  << " die at each other's hands" << endl;
         }
     }
@@ -83,7 +85,8 @@ void status(const vector<Warrior>& Warriors){
     cout << "There are: " << amount_warriors << " warriors" << endl;
 
     for (Warrior warrior : Warriors){
-        cout << "Warrior: " << warrior.name << ", strength: " << warrior.strength << endl;
+        cout << "Warrior: " << warrior.name << ", strength: " 
+        << warrior.strength << endl;
     }
 }
 
@@ -110,7 +113,8 @@ void run_file(fstream& warriors_file){
             // Checks for duplicates
             for (const Warrior& warrior : warriorlist.Warriors) { 
                 if (warrior.name == name) {
-                    cerr << "Error: Warrior with the name '" << name << "' already exists" << endl;
+                    cerr << "Error: Warrior with the name '" << name 
+                    << "' already exists" << endl;
                     duplicate = true;
                     break;
                 }
