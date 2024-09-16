@@ -43,26 +43,32 @@ void battle(Warrior& Warrior1, Warrior& Warrior2){
     else {
          cout << Warrior1.name << " battles " << Warrior2.name << endl;
 
-        if (Warrior1.strength > 0 && Warrior2.strength == 0){  // Case where Warrior1 exists and Warrior2 does not
+        // Case where Warrior1 exists and Warrior2 does not
+        if (Warrior1.strength > 0 && Warrior2.strength == 0){  
             cout << "He's dead, " << Warrior1.name << endl;
 
-        } else if (Warrior2.strength > 0 && Warrior1.strength == 0){  // Case where Warrior2 exists and Warrior1 does not
+        // Case where Warrior2 exists and Warrior1 does not
+        } else if (Warrior2.strength > 0 && Warrior1.strength == 0){  
             cout << "He's dead, " << Warrior2.name << endl;
 
-        } else if (Warrior1.strength == 0 && Warrior2.strength == 0){ // Case where both Warriors are dead
+        // Case where both Warriors are dead
+        } else if (Warrior1.strength == 0 && Warrior2.strength == 0){ 
             cout << "Oh, NO! They're both dead! Yuck!" << endl;
 
-        } else if (Warrior1.strength > Warrior2.strength){ // Case if Warrior1 is stronger
+        // Case if Warrior1 is stronger
+        } else if (Warrior1.strength > Warrior2.strength){ 
             cout << Warrior1.name << " defeats " << Warrior2.name << endl;
             Warrior1.strength -= Warrior2.strength;
             Warrior2.strength = 0;
 
-        } else if (Warrior2.strength > Warrior1.strength){ // Case if Warrior2 is stronger
+        // Case if Warrior2 is stronger
+        } else if (Warrior2.strength > Warrior1.strength){ 
             cout << Warrior2.name << " defeats " << Warrior1.name << endl;
             Warrior2.strength -= Warrior1.strength;
             Warrior1.strength = 0;
 
-        } else {  //Case if the strengths are equal
+        // Case if the strengths are equal
+        } else {  
             Warrior1.strength = 0;
             Warrior2.strength = 0;
             cout << "Mutual Annihilation: " << Warrior1.name << " and " << Warrior2.name  
@@ -71,7 +77,7 @@ void battle(Warrior& Warrior1, Warrior& Warrior2){
     }
 }
 
-// Status command displays how many warriors there are and how much strength each of them have
+// Status command displays how many warriors and their amount of strength
 void status(vector<Warrior>& Warriors){
     size_t amount_warriors = Warriors.size();
     cout << "There are: " << amount_warriors << " warriors" << endl;
@@ -94,13 +100,15 @@ void run_file(fstream& warriors_file){
     string command;
 
     while(warriors_file >> command){
-        if (command == "Warrior"){ // Creates new Warrior
+        // Creates new Warrior
+        if (command == "Warrior"){ 
             string name;
             int strength;
             warriors_file >> name >> strength;
             bool duplicate = false;
 
-            for (const Warrior& warrior : warriorlist.Warriors) { // Checks for duplicates
+            // Checks for duplicates
+            for (const Warrior& warrior : warriorlist.Warriors) { 
                 if (warrior.name == name) {
                     cerr << "Error: Warrior with the name '" << name << "' already exists" << endl;
                     duplicate = true;
@@ -108,14 +116,16 @@ void run_file(fstream& warriors_file){
                 }
             }
             
-            if (!duplicate) { // If no duplicate, add the new warrior
+            // If no duplicate, add the new warrior
+            if (!duplicate) { 
                 Warrior new_warrior;
                 new_warrior.name = name;
                 new_warrior.strength = strength;
                 warriorlist.Warriors.push_back(new_warrior);
             }
 
-        } else if (command == "Battle"){ // Handles the Battle command
+        // Handles the Battle command
+        } else if (command == "Battle"){ 
             string name1, name2;
             warriors_file >> name1 >> name2;
             Warrior* Warrior1 = nullptr;
@@ -131,13 +141,15 @@ void run_file(fstream& warriors_file){
                 }
             }
 
-            if (Warrior1 && Warrior2) { // If warriors found, run the battle function
+             // If warriors found, run the battle function
+            if (Warrior1 && Warrior2) {
                 battle(*Warrior1, *Warrior2);
             } else {
                 cerr << "Error: One or both warriors not found." << endl;
             }
 
-        } else if (command == "Status"){ // Runs status function
+        // Runs status function
+        } else if (command == "Status"){ 
             status(warriorlist.Warriors);
         }
     }
