@@ -1,0 +1,13 @@
+Error: Warrior with the name 'Jim' already exists
+Error: One or both warriors not found.
+Error: One or both warriors not found.
+Jim battles Gates
+Jim defeats Gates
+Jim battles Gates
+He's dead, Jim
+There are: 5 warriors
+Warrior Jim, weapon: Glamdring, 42
+Warrior Lancelot, weapon: Naegling, 15
+Warrior Arthur, weapon: Excalibur, 15
+Warrior Torvalds, weapon: Narsil, 20
+Warrior Gates, weapon: Orcrist, 0
