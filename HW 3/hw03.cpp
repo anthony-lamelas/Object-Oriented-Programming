@@ -166,8 +166,7 @@ void execute_battle(fstream& warriors_file, vector<Warrior>& warriorlist) {
             index2 = i;
         }
     }
-    if (index1 != warriorlist.size() 
-    && index2 != warriorlist.size()) {
+    if (index1 != warriorlist.size() && index2 != warriorlist.size()) {
        warriorlist[index1].battle(warriorlist[index2]);
     } else {
         cerr << "Error: One or both warriors not found." << endl;
