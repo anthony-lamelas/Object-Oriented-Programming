@@ -36,7 +36,6 @@ public:
     // Methods for Noble
     const string& getName() const { return noble_name; }
     const bool getStatus() const { return living; }
-    const vector<Warrior*> getArmy() const { return army; }
 
     // Gets the total strength of the noble's army
     const double getArmyStrength() const {
@@ -84,10 +83,8 @@ public:
         if (!living) {
             return false;
         }
-
         bool found = false;
         int index;
-
         // Finds the warrior that is going to be fired in the army
         for (size_t i = 0; i < army.size(); i++) {
             if (army[i] == &warrior) {
@@ -100,7 +97,6 @@ public:
                 break;
             }
         }
-
         // Shifts elements if warrior is found, then removes the pointer of
         // fired warrior
         if (found) {
@@ -112,48 +108,41 @@ public:
         else {
           cout << noble_name << " failed to fire " << warrior.getName() << endl;
         }
-
         return found;
     }
 
     // Battle between two nobles
     void battle(Noble& opponent) {
         cout << noble_name << " battles " << opponent.getName() << endl;
-
-        // Both dead
-        if (!living && !opponent.getStatus()) {
+        if (!living && !opponent.getStatus()) { // Both dead
             cout << "Oh, NO! They're both dead! Yuck!" << endl;
         }
-        // Main dead
-        else if (!living && opponent.getStatus()) {
+        
+        else if (!living && opponent.getStatus()) { // Main dead
             cout << "He's dead, " << opponent.getName() << endl;
         }
-        // Enemy is dead
-        else if (living && !opponent.getStatus()) {
+        
+        else if (living && !opponent.getStatus()) { // Enemy is dead
             cout << "He's dead, " << noble_name << endl;
         }
-        // Both are alive
-        else {
+        
+        else { // Both are alive
             double my_str = getArmyStrength();
             double opponent_str = opponent.getArmyStrength();
-
-            // If it is a tie
-            if (my_str == opponent_str) {
+            if (my_str == opponent_str) { // If it is a tie
                 kill();
                 opponent.kill();
                 cout << "Mutual Annihilation: " << noble_name << " and "
                     << opponent.getName() << " die at each other's hands"
                     << endl;
             }
-            // If main noble wins
-            else if (my_str > opponent_str) {
+            else if (my_str > opponent_str) { // If main noble wins
                 setArmyStrength(my_str, opponent_str);
                 opponent.kill();
                 cout << noble_name << " defeats " << opponent.getName()
                     << endl;
             }
-            // If opponent wins
-            else {
+            else { // If opponent wins
                 opponent.setArmyStrength(opponent_str, my_str);
                 kill();
                 cout << opponent.getName() << " defeats " << noble_name
@@ -170,16 +159,16 @@ private:
 
 // Operator overload for Warrior
 ostream& operator<<(ostream& os, const Warrior& warrior) {
-    os << " " << warrior.getName() << ": " << warrior.getStrength();
+    os << " " << warrior.warr_name << ": " << warrior.strength;
     return os;
 }
 
 // Operator overload for Noble
 ostream& operator<<(ostream& os, const Noble& noble) {
-    os << noble.getName() << " has an army of " << noble.getArmy().size()
+    os << noble.noble_name << " has an army of " << noble.army.size()
         << endl;
 
-    for (const Warrior* const warrior : noble.getArmy()) {
+    for (const Warrior* const warrior : noble.army) {
         if (warrior) {
             os << *warrior << endl;
         }
