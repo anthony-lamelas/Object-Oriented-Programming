@@ -41,7 +41,7 @@ public:
     // Gets the total strength of the noble's army
     const double getArmyStrength() const {
         double total_str = 0;
-        for (Warrior* const& warrior : army) {
+        for (const Warrior* const warrior : army) {
             total_str += warrior->getStrength();
         }
         return total_str;
@@ -50,7 +50,7 @@ public:
     // Updates army strength after the battle
     void setArmyStrength(double champ_str, double loser_str) {
         double str_ratio = loser_str / champ_str;
-        for (Warrior*& warrior : army) {
+        for (Warrior* const warrior : army) {
             double new_str = warrior->getStrength() * (1 - str_ratio);
             warrior->setStrength(new_str);
         }
@@ -69,6 +69,8 @@ public:
     // Hire Warrior
     bool hire(Warrior& warrior) {
         if (warrior.getJobStatus() || !living) {
+            cout << noble_name << " failed to hire " << warrior.getName() 
+            << endl;
             return false;
         } else {
             warrior.changeJobStatus();
@@ -177,7 +179,7 @@ ostream& operator<<(ostream& os, const Noble& noble) {
     os << noble.getName() << " has an army of " << noble.getArmy().size()
         << endl;
 
-    for (Warrior* warrior : noble.getArmy()) {
+    for (const Warrior* const warrior : noble.getArmy()) {
         if (warrior) {
             os << *warrior << endl;
         }
