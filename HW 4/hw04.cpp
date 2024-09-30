@@ -12,7 +12,7 @@ public:
     Warrior(const string& n, double s) : warr_name(n), strength(s), has_job(false) {}
 
     // Methods for Warrior
-    string getName() const { return warr_name; }
+    const string& getName() const { return warr_name; }
     double getStrength() const { return strength; }
     void setStrength(double newStrength) { strength = newStrength; }
     bool getJobStatus() const { return has_job; }
@@ -34,12 +34,12 @@ public:
     Noble(const string& n) : noble_name(n), army(), living(true) {}
 
     // Methods for Noble
-    string getName() const { return noble_name; }
-    bool getStatus() const { return living; }
-    vector<Warrior*> getArmy() const { return army; }
+    const string& getName() const { return noble_name; }
+    const bool getStatus() const { return living; }
+    const vector<Warrior*> getArmy() const { return army; }
 
     // Gets the total strength of the noble's army
-    double getArmyStrength() const {
+    const double getArmyStrength() const {
         double total_str = 0;
         for (Warrior* const& warrior : army) {
             total_str += warrior->getStrength();
@@ -166,6 +166,24 @@ private:
     bool living;
 };
 
+// Operator overload for Warrior
+ostream& operator<<(ostream& os, const Warrior& warrior) {
+    os << " " << warrior.getName() << ": " << warrior.getStrength();
+    return os;
+}
+
+// Operator overload for Noble
+ostream& operator<<(ostream& os, const Noble& noble) {
+    os << noble.getName() << " has an army of " << noble.getArmy().size()
+        << endl;
+
+    for (Warrior* warrior : noble.getArmy()) {
+        if (warrior) {
+            os << *warrior << endl;
+        }
+    }
+    return os;
+}
 
 int main() {
 
@@ -225,21 +243,3 @@ int main() {
 } // main
 
 
-// Operator overload for Warrior
-ostream& operator<<(ostream& os, const Warrior& warrior) {
-    os << " " << warrior.getName() << ": " << warrior.getStrength();
-    return os;
-}
-
-// Operator overload for Noble
-ostream& operator<<(ostream& os, const Noble& noble) {
-    os << noble.getName() << " has an army of " << noble.getArmy().size()
-        << endl;
-
-    for (Warrior* warrior : noble.getArmy()) {
-        if (warrior) {
-            os << *warrior << endl;
-        }
-    }
-    return os;
-}
