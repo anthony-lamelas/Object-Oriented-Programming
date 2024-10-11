@@ -1,0 +1,13 @@
+Noble KingArthur
+Noble QueenElizabeth
+Warrior Lancelot 150
+Warrior Galahad 100
+Hire KingArthur Lancelot
+Hire KingArthur Galahad
+Hire QueenElizabeth Lancelot
+Noble KingArthur
+Warrior Percival 120
+Hire KingArthur Percival
+Fire KingArthur Lancelot
+Battle KingArthur QueenElizabeth
+Status

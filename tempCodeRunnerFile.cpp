@@ -210,12 +210,12 @@ int main() {
     string command;
     vector<Noble*> noble_vect;
     vector<Warrior*> warrior_vect;
-
+    cout << "Here" << endl;
     while (stream >> command){
         if (command == "Noble"){
             string name;
             stream >> name;
-
+            cout << "Here 2" << endl;
             if(findNoble(noble_vect, name)){
                 cout << "Noble " << name <<  " already exists." << endl;
             } else{
@@ -225,6 +225,7 @@ int main() {
 
         else if (command == "Warrior"){
             string name;
+            cout << "Here 3" << endl;
             double strength;
             stream >> name >> strength;
 
