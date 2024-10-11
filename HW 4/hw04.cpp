@@ -193,43 +193,7 @@ int main() {
     Warrior dylan("Hercules", 3);
 
     jim.hire(nimoy);
-    lance.hire(theGovernator);
-    art.hire(wizard);
-    lance.hire(dylan);
-    linus.hire(lawless);
-    billie.hire(mrGreen);
-    art.hire(cheetah);
-    art.hire(nimoy);
-
-    cout << "==========\n\n"
-        << "Status before all battles, etc.\n";
-    cout << jim << endl;
-    cout << lance << endl;
-    cout << art << endl;
-    cout << linus << endl;
-    cout << billie << endl;
-    cout << "==========\n\n";
-
-    art.fire(cheetah);
-    cout << art << endl;
-
-    lance.fire(nimoy);
-    cout << lance << endl;
-    cout << "==========\n\n";
-
-    art.battle(lance);
-    jim.battle(lance);
-    linus.battle(billie);
-    billie.battle(lance);
-
-    cout << "==========\n\n"
-        << "Status after all battles, etc.\n";
-    cout << jim << endl;
-    cout << lance << endl;
-    cout << art << endl;
-    cout << linus << endl;
-    cout << billie << endl;
-    cout << "==========\n";
+    
 
 } // main
 
