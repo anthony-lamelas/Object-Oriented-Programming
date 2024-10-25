@@ -51,6 +51,7 @@
         "text_encoding": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "hw05": "cpp"
+        "hw05": "cpp",
+        "cstring": "cpp"
     }
 }
