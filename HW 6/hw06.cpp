@@ -15,6 +15,7 @@ void addDigits(vector<int>& result, const vector<int>& a, const vector<int>& b);
 
 class BigUnsigned {
 
+friend bool operator==(int lhs, const BigUnsigned& rhs);
 friend ostream& operator<<(ostream& os, const BigUnsigned& num);
 friend BigUnsigned operator+(const BigUnsigned& lhs, const BigUnsigned& rhs);
 
@@ -132,7 +133,7 @@ public:
     }
 
     // Implicit conversion to bool
-    operator bool() const {
+    explicit operator bool() const {
         return !(digits.size() == 1 && digits[0] == 0);
     }
 
@@ -239,4 +240,9 @@ BigUnsigned operator+(const BigUnsigned& lhs, const BigUnsigned& rhs) {
     BigUnsigned result = lhs;
     result += rhs;
     return result;
+}
+
+// == operator for int and bigunsigned
+bool operator==(int lhs, const BigUnsigned& rhs) {
+    return BigUnsigned(lhs) == rhs;
 }
