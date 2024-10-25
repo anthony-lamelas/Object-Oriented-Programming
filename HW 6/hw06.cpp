@@ -226,7 +226,6 @@ int main()
 } // main
 
 
-
 // << operator
 ostream& operator<<(ostream& os, const BigUnsigned& num) {
         for (int i = num.digits.size() - 1; i >= 0; i--) {
