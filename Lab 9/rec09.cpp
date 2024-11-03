@@ -28,7 +28,6 @@ public:
             cout << endl;
         }
     
-    
 private:
 };
 
