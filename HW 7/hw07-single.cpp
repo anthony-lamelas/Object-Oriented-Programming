@@ -178,10 +178,10 @@ bool Warrior::runaway() {
             cout << warr_name << " has no boss.";
             return false;
         }
-        string lordname = boss->getName();
+        string lord_name = boss->getName();
         if (boss->remove_warrior(*this)) {
             cout << warr_name << " flees in terror, abandoning his lord, "
-                 << lordname << endl;
+                 << lord_name << endl;
             return true;
         }
         return false;  

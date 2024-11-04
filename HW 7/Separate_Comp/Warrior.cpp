@@ -43,7 +43,4 @@ bool Warrior::runaway() {
         }
         return false;  
     }
-
-
-
 }
