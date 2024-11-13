@@ -8,25 +8,122 @@
 
  */
 
+  //Close gap in vector when fired or runaway
+  //Change str of wizard name to magic
+
 #include <string>
 #include <vector>
 #include <iostream>
 #include <cassert>
 using namespace std;
 
-// Noble Class
+// Noble Class (Lords, Fighters)
 class Noble {
-  Noble(const string& n) : noble_name(n){};
+  public:
 
-  virtual battle
+  Noble(const string& name);
 
+  // Battle with Opponent
+  virtual void battle(Noble& opponent) = 0;
+
+    // Gets the name
+    const string& getName() const;
+
+    // Gets the life status
+    bool getStatus() const;
+
+    // Changes Noble to dead
+    void kill();
 
   protected:
-    string noble_name
-}
+    string noble_name;
+    bool living;
+};
+
+class Lord : public Noble {
+  public:
+
+  Lord(const string& name);
+
+  void battle(Noble& opponent) override;
+
+  // Gets the army size
+    size_t getSize() const;
+
+    //Removes Warrior from army
+    bool remove_protector(Protector& protector);
+
+      // Hire Warrior
+    bool hires(Protector& protector);
+
+    // Fire Warrior
+    bool fire(Protector& protector);
+
+    // Gets the total strength of the noble's army
+    const double getArmyStrength() const;
+
+    // Updates army strength after the battle
+    void setArmyStrength(double champ_str, double loser_str);
 
 
+  private:
+    vector<Protector*> army;
+};
 
+class PersonWithStrengthToFight : public Noble {
+  public:
+
+   PersonWithStrengthToFight(const string& name, int strength);
+
+
+  void battle(Noble& opponent) override;
+
+  private:
+    int strength;
+};
+
+class Protector {
+
+  Protector(const string& name, double str);
+
+    const string& getName() const;
+    double getStrength() const;
+    void setStrength(double newStrength);
+    bool isHired() const;
+    void changeJobStatus();
+    Noble* getBoss() const;
+    void setBoss(Noble* noblep);
+    bool runaway();
+
+    private:
+      string protector_name;
+      double strength;
+      bool has_job;
+      Noble* boss;
+
+};
+
+class Wizard : public Protector {
+  Wizard(const string& name, double str);
+
+};
+
+class Warrior : public Protector {
+  Warrior(const string& name, double str);
+
+
+};
+
+class Archer : public Warrior {
+  Archer(const string& name, double str);
+
+};
+
+class Swordsman : public Warrior {
+  Swordsman(const string& name, double str);
+
+
+};
 
 //
 // Test Code
