@@ -2,8 +2,8 @@
   Anthony Lamelas
 */
 
-#ifndef PROTECTOR_HPP
-#define PROTECTOR_HPP
+#ifndef PROTECTOR_H
+#define PROTECTOR_H
 
 #include <fstream>
 #include <iostream>

@@ -2,8 +2,8 @@
   Anthony Lamelas
 */
 
-#ifndef NOBLE_HPP
-#define NOBLE_HPP
+#ifndef NOBLE_H
+#define NOBLE_H
 
 #include <iostream>
 #include <string>
