@@ -13,21 +13,21 @@
 namespace WarriorCraft {
     class Protector;
     class Noble;
-
-//Output Operator
-    std::ostream& operator<<(std::ostream& os, const Protector& protector);
-
     class Lord;
 
 class Protector {
+    //Output Operator
+    friend std::ostream& operator<<(std::ostream& os, 
+    const Protector& protector);
+
     public:
 
-  Protector(const std::string& name, int str);
+  Protector(const std::string& name, double str);
 
     // Getters and Setters
     const std::string& getName() const;
-    int getStrength() const;
-    void setStrength(int newStrength);
+    double getStrength() const;
+    void setStrength(double newStrength);
     Lord* getBoss() const;
     void setBoss(Lord* noblep);
 
@@ -45,7 +45,7 @@ class Protector {
 
     private:
       std::string protector_name;
-      int strength;
+      double strength;
       bool has_job;
       Lord* boss;
 

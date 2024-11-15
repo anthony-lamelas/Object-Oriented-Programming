@@ -15,14 +15,9 @@ namespace WarriorCraft {
   class Noble;
   class Lord;
   
-  // Output Operators
-  std::ostream& operator<<(std::ostream& os, const Noble& noble);
-  std::ostream& operator<<(std::ostream& os, const Lord& lord);
-
-    
-
     // Noble Class (Lords, Fighters)
 class Noble {
+
   public:
 
   Noble(const std::string& name);
@@ -34,21 +29,22 @@ class Noble {
   const std::string& getName() const;
 
   // Gets strength 
-  virtual int getStrength() const = 0;
+  virtual double getStrength() const = 0;
 
   // Changes strength after fight
-  virtual void setStrength(int champ_str, int loser_str) = 0;
+  virtual void setStrength(double champ_str, double loser_str) = 0;
 
   // Defend, different ouptut depending on type of Noble
   virtual void defend() const = 0;
 
   // Changes Noble to dead
-  void kill();
+  virtual void kill() = 0;
 
-  protected:
-    // Gets the life status
-    bool getStatus() const;
-    void changeStatus();
+  // Gets life status
+  bool getStatus() const;
+
+  // Changes life status
+  void changeStatus();
 
   private:
     std::string noble_name;
@@ -56,6 +52,10 @@ class Noble {
 };
 
 class Lord : public Noble {
+
+    //Output Operator
+    friend std::ostream& operator<<(std::ostream& os, const Lord& lord);
+
   public:
 
   Lord(const std::string& name);
@@ -70,10 +70,10 @@ class Lord : public Noble {
     bool fires(Protector& protector);
 
     // Gets the total strength of the noble's army
-    int getStrength() const override;
+    double getStrength() const override;
 
     // Updates army strength after the battle
-    void setStrength(int champ_str, int loser_str) override;
+    void setStrength(double champ_str, double loser_str) override;
 
     //Defend func
     void defend() const override;
@@ -81,27 +81,38 @@ class Lord : public Noble {
     //Gets army
     const std::vector<Protector*> getArmy() const;
 
+    //You die
+    void kill();
+
 
   private:
     std::vector<Protector*> army;
 };
 
 class PersonWithStrengthToFight : public Noble {
+
+    // Output Operator
+  friend std::ostream& operator<<(std::ostream& os, 
+  const WarriorCraft::PersonWithStrengthToFight& noble);
+
   public:
 
-   PersonWithStrengthToFight(const std::string& name, int strength);
+   PersonWithStrengthToFight(const std::string& name, double strength);
 
   // Get's the strength of the noble
-    int getStrength() const override;
+    double getStrength() const override;
 
   // Changes strength after battle
-  void setStrength(int champ_str, int loser_str) override;
+  void setStrength(double champ_str, double loser_str) override;
 
   // Defend fuction
   void defend() const override;
 
+  //You die
+  void kill();
+
   private:
-    int strength;
+    double strength;
 };
 }
 

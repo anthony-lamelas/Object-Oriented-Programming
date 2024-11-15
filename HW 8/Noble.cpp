@@ -18,7 +18,6 @@ namespace WarriorCraft {
     bool Noble::getStatus() const { return living; }
     void Noble::changeStatus() {living = !living; }
 
-
     void Noble::battle(Noble& opponent) {
         cout << noble_name << " battles " << opponent.getName() << endl;
         if (!living && !opponent.getStatus()) { // Both dead
@@ -36,8 +35,8 @@ namespace WarriorCraft {
         }
         
         else { // Both are alive
-            int my_str = getStrength();
-            int opponent_str = opponent.getStrength();
+            double my_str = getStrength();
+            double opponent_str = opponent.getStrength();
             defend();
             opponent.defend();
 
@@ -63,32 +62,21 @@ namespace WarriorCraft {
         }
     }
 
-void Noble::kill() {
+Lord::Lord(const string& name) : Noble(name){}
+
+//Kills the Lord
+void Lord::kill() {
         changeStatus();
         // Makes all protector strengths 0 
         setStrength(1,1);
     }
 
-// Output Operator for Noble
-std::ostream& operator<<(std::ostream& os, const WarriorCraft::Noble& noble) {
-    os << noble.getName();
-    if (noble.getStrength() > 0) {
-        os << " has strength: " << noble.getStrength();
-    } else {
-        os << " has no strength";
-    }
-    return os;
-}
-
-Lord::Lord(const string& name) : Noble(name){}
-
 //Gets the Army
-
 const vector<Protector*> Lord::getArmy() const {return army; }
 
 // Gets the total strength of the noble's army
- int Lord::getStrength() const {
-        int total_str = 0;
+ double Lord::getStrength() const {
+        double total_str = 0;
         for ( Protector* const& protector : army) {
             total_str += protector->getStrength();
         }
@@ -96,10 +84,10 @@ const vector<Protector*> Lord::getArmy() const {return army; }
     }
 
 // Updates army strength after the battle
-void Lord::setStrength(int champ_str, int loser_str) {
-        int str_ratio = loser_str / champ_str;
+void Lord::setStrength(double champ_str, double loser_str) {
+        double str_ratio = loser_str / champ_str;
         for (Protector* const protector : army) {
-            int new_str = protector->getStrength()
+            double new_str = protector->getStrength()
              * (champ_str - loser_str) / champ_str;
             protector->setStrength(new_str);
         }
@@ -141,7 +129,7 @@ bool Lord::fires(Protector& protector) {
 
 bool Lord::remove_protector(Protector& protector) {
     bool found = false;
-    int index;
+    double index;
 
     for (size_t i = 0; i < army.size(); i++){
         if (army[i] == &protector){
@@ -164,23 +152,40 @@ bool Lord::remove_protector(Protector& protector) {
 
 // Output Operator for Lord
 std::ostream& operator<<(std::ostream& os, const WarriorCraft::Lord& lord) {
-    os << lord.getName() << " has an army of size: " << lord.getArmy().size()
+    os << lord.getName() << " has an army of size: " << lord.army.size()
      << "\n";
-    for (const Protector* protector : lord.getArmy()) {
+    for (const Protector* protector : lord.army) {
         os << "\t" << protector->getName() << " has strength " 
         << protector->getStrength() << "\n";
     }
     return os;
 }
 
-
 PersonWithStrengthToFight::PersonWithStrengthToFight(const string& name, 
- int str) : Noble(name), strength(str) {}
+ double str) : Noble(name), strength(str) {}
 
-int PersonWithStrengthToFight::getStrength() const { return strength; }
+// Output Operator for PersonWithStrengthToFight
+std::ostream& operator<<(std::ostream& os, 
+const WarriorCraft::PersonWithStrengthToFight& noble) {
+
+    os << noble.getName();
+    if (noble.getStrength() > 0) {
+        os << " has strength: " << noble.strength;
+    } else {
+        os << " has strength " << 0;
+    }
+    return os;
+}
+
+ void PersonWithStrengthToFight::kill() {
+        changeStatus();
+        strength = 0;
+    }
+
+double PersonWithStrengthToFight::getStrength() const { return strength; }
 
 void PersonWithStrengthToFight::setStrength
-    (int champ_str, int loser_str) {
+    (double champ_str, double loser_str) {
         strength -= loser_str;
     }
 

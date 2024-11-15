@@ -8,15 +8,15 @@ using namespace std;
 
 namespace WarriorCraft {
 
-Protector::Protector(const string& name, int str) : protector_name(name), 
+Protector::Protector(const string& name, double str) : protector_name(name), 
 strength(str), boss(nullptr), has_job(false){}
 
 // Getters and Setters
 const string& Protector::getName() const { return protector_name; }
-int Protector::getStrength() const { return strength; }
+double Protector::getStrength() const { return strength; }
 void Protector::setBoss(Lord* noblep) { boss = noblep; }
 Lord* Protector::getBoss() const  {return boss; }
-void Protector::setStrength(int newStrength) { strength = newStrength; }
+void Protector::setStrength(double newStrength) { strength = newStrength; }
 
 // Checks if protector has a job
 bool Protector::isHired() const { return has_job; }
@@ -47,7 +47,7 @@ bool Protector::runaway() {
 std::ostream& operator<<(std::ostream& os, 
     const WarriorCraft::Protector& protector) {
 
-    os << protector.getName() << " has strength " << protector.getStrength();
+    os << protector.protector_name << " has strength " << protector.strength;
     return os;
 }
 
