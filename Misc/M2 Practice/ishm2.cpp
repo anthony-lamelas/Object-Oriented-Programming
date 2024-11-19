@@ -94,6 +94,8 @@ using namespace std;
 // public:
 // FlyingMachine() {}
 // virtual void fly() { cout << "In FlyingMachine fly()"; }
+
+// virtual void crash() = 0;
 // };
 // class HangGlider : public FlyingMachine {
 // public:
@@ -103,9 +105,13 @@ using namespace std;
 
 // int main() {
 // HangGlider hanger;
-// FlyingMachine flier;
-// flier = hanger;
-// flier.crash();
+
+// HangGlider* hp = &hanger;
+// FlyingMachine* fp = hp;
+
+
+// fp->crash();
+
 // }
 
 
@@ -125,7 +131,7 @@ using namespace std;
 // };
 
 // int main() {
-// Constitution* NCC_1701 = new Constitution();
+// FederationStarship* NCC_1701 = new Constitution();
 // NCC_1701->attack("phasers");
 // }
 
