@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+using namespace linkedPolynomial;
 
 void doNothing(Polynomial temp) {}
 
@@ -33,7 +34,7 @@ int main()
          << "p2 + p4: " << (p2+p4) << endl
          << "p4 + p2: " << (p4+p2) << endl;
 
-    //test copy constructor - the statement below uses the copy constructor
+    //test copy constructor - the statement below uses the copy constructor 
     //to initialize poly3 with the same values as poly4
     Polynomial p5(p4);
     p5 += p3;

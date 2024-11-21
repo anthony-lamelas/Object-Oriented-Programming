@@ -1,5 +1,5 @@
 /*
-Anthony Lamelas, polynomial.h file for polynomai linked list homework
+Anthony Lamelas, polynomial.h file for polynomial linked list homework
 */
 
 #ifndef POLYNOMIAL_H
@@ -14,7 +14,7 @@ namespace linkedPolynomial{
     class Polynomial{
         struct NodeTerm;
 
-        friend ostream& operator <<(std::ostream& os, const Polynomial rhs);
+        friend std::ostream& operator <<(std::ostream& os, const Polynomial& rhs);
         friend bool operator==(const Polynomial& lhs, const Polynomial& rhs);
 
         public:
@@ -28,9 +28,9 @@ namespace linkedPolynomial{
             Polynomial(const Polynomial& rhs);
             ~Polynomial();
 
-            void clearLeading();
+            void clearZeroes();
             void deletePoly(NodeTerm* current);
-            int eval(int val) const;
+            int evaluate(int val) const;
             void addFront(int data);
             Polynomial::NodeTerm* addBack(int data, NodeTerm* current);
 
