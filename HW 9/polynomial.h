@@ -12,7 +12,7 @@ Anthony Lamelas, polynomial.h file for polynomai linked list homework
 namespace linkedPolynomial{
 
     class Polynomial{
-        struct Term;
+        struct NodeTerm;
 
         friend ostream& operator <<(std::ostream& os, const Polynomial rhs);
         friend bool operator==(const Polynomial& lhs, const Polynomial& rhs);
@@ -28,19 +28,23 @@ namespace linkedPolynomial{
             Polynomial(const Polynomial& rhs);
             ~Polynomial();
 
-        int eval(int val) const;
+            void clearLeading();
+            void deletePoly(NodeTerm* current);
+            int eval(int val) const;
+            void addFront(int data);
+            Polynomial::NodeTerm* addBack(int data, NodeTerm* current);
 
         private:
 
             struct NodeTerm{
 
-                Term(int coefficient = 0, Term* next = nullptr);
+                NodeTerm(int coefficient = 0, NodeTerm* next = nullptr);
 
                     int coefficient;
-                    Term* next;
+                    NodeTerm* next;
             };
 
-            Term* head;
+            NodeTerm* head;
             int degree;
 
             
