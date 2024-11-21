@@ -28,7 +28,7 @@ namespace linkedPolynomial{
             Polynomial(const Polynomial& rhs);
             ~Polynomial();
 
-            void clearZeroes();
+            void clearEndingZeroes();
             void deletePoly(NodeTerm* current);
             int evaluate(int val) const;
             void addFront(int data);
