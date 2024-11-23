@@ -29,13 +29,14 @@ namespace linkedPolynomial{
             ~Polynomial();
 
             void clearEndingZeroes();
+            void clearLeadingZeroes();
             void deletePoly(NodeTerm* current);
+            bool isEmpty() const;
             int evaluate(int val) const;
             void addFront(int data);
             Polynomial::NodeTerm* addBack(int data, NodeTerm* current);
 
         private:
-
             struct NodeTerm{
 
                 NodeTerm(int coefficient = 0, NodeTerm* next = nullptr);
@@ -46,13 +47,10 @@ namespace linkedPolynomial{
 
             NodeTerm* head;
             int degree;
-
-            
     };
 
     Polynomial operator+(const Polynomial& lhs, const Polynomial& rhs);
     bool operator!=(const Polynomial& lhs, const Polynomial& rhs);
-
 }
 
 #endif
