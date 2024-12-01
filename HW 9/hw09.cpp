@@ -13,7 +13,6 @@ void doNothing(Polynomial temp) {}
 
 int main()
 {
-        
     //test constructor
     Polynomial p0;                       // 0
     Polynomial p1({17});                 // 17

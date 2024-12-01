@@ -3,7 +3,7 @@ Anthony Lamelas, polynomial.h file for polynomial linked list homework
 */
 
 #ifndef POLYNOMIAL_H
-#define POLYNOMIAL_h
+#define POLYNOMIAL_H
 
 #include <iostream>
 #include <string>
@@ -14,7 +14,9 @@ namespace linkedPolynomial{
     class Polynomial{
         struct NodeTerm;
 
-        friend std::ostream& operator <<(std::ostream& os, const Polynomial& rhs);
+        friend std::ostream& operator <<(std::ostream& os, 
+        const Polynomial& rhs);
+
         friend bool operator==(const Polynomial& lhs, const Polynomial& rhs);
 
         public:
@@ -29,7 +31,7 @@ namespace linkedPolynomial{
             ~Polynomial();
 
             void clearEndingZeroes();
-            void clearLeadingZeroes();
+            void clearLeadingZeroes(); 
             void deletePoly(NodeTerm* current);
             bool isEmpty() const;
             int evaluate(int val) const;

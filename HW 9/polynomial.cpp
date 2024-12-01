@@ -15,14 +15,10 @@ namespace linkedPolynomial {
     Polynomial::Polynomial(const std::vector<int>& coefficients)
         : head(nullptr), degree(coefficients.size() - 1) { 
         NodeTerm* tail = nullptr;  // Tail pointer to build the linked list
-        bool lead = false;
 
         for (int coefficient : coefficients) {
-            if(!lead && coefficient == 0){
-                
-            }
             if (!head) {
-                // Creates first node not head
+                // Creates first node
                 head = new NodeTerm(coefficient);
                 tail = head;
             } else {
@@ -31,52 +27,13 @@ namespace linkedPolynomial {
                 tail = tail->next;
             }
         }
-        clearEndingZeroes(); 
-
-        NodeTerm* current = head;
-        while(current){
-
-            current = current->next;
-
-        }
-        
+        clearLeadingZeroes(); // Ensure no leading zeroes 
     }
-
-//     void Polynomial::clearLeadingZeroes() {
-
-//         if(head->coefficient != 0){
-//             return;
-//         }
-//         NodeTerm* current = head;
-//         bool flag = false;
-
-//         while(current->coefficient == 0){
-//             flag = true;
-//             head->next = current->next;
-//             delete current;
-//             current = current->next;
-
-//             --degree;
-//         }
-
-//         if(head->coefficient == 0){
-//             NodeTerm* deleted = head->next;
-//             NodeTerm* nextNext = deleted->next;
-//             head->coefficient = deleted->coefficient;
-//             delete deleted;
-
-//         head->next = nextNext;
-//         }
-
-//         NodeTerm* current1 = this->head;
-
-// }
-
 
     Polynomial::NodeTerm::NodeTerm(int coefficient, NodeTerm* next) 
         : coefficient(coefficient), next(next) {}  
 
-    // Copy Control
+    // Copy Constructor
     Polynomial::Polynomial(const Polynomial& rhs) 
         : head(nullptr), degree(-1) { 
         
@@ -88,15 +45,15 @@ namespace linkedPolynomial {
             previous = addBack(current->coefficient, previous);  
             current = current->next;
         }
+        clearLeadingZeroes(); // Clear leading zeroes in the copied polynomial
     }
 
+    // Copy Assignment Operator
     Polynomial& Polynomial::operator=(const Polynomial& rhs) {
-
         if (this != &rhs) { 
             deletePoly(head); 
 
-           NodeTerm* newHead = new NodeTerm(*(rhs.head));
-
+            NodeTerm* newHead = new NodeTerm(*(rhs.head));
             head = newHead;
             degree = 0; 
 
@@ -109,6 +66,7 @@ namespace linkedPolynomial {
                 current = current->next;
             }
         }
+        clearLeadingZeroes(); // Clear leading zeroes after assignment
         return *this;  
     }
 
@@ -117,16 +75,20 @@ namespace linkedPolynomial {
     }
 
     // Methods
+    
+    // Add new node to the front of the list
     void Polynomial::addFront(int data) {
         // Create new node and set it as head
         head = new NodeTerm(data, head);  
         ++degree; 
     }
 
+    // Check if the polynomial is empty
     bool Polynomial::isEmpty() const {
         return (degree == 0 && head->coefficient == 0);
     }
 
+    // Add new node to the end of the list
     Polynomial::NodeTerm* Polynomial::addBack(int data, NodeTerm* current) {
         if (!current) {
             // Initialize the head if empty
@@ -141,6 +103,7 @@ namespace linkedPolynomial {
         }
     }
 
+    // Delete all nodes in the polynomial
     void Polynomial::deletePoly(NodeTerm* current) {
         while (current) {
             NodeTerm* previous = current;  
@@ -163,6 +126,22 @@ namespace linkedPolynomial {
         return result;  
     }
 
+    // Clear leading zeroes 
+    void Polynomial::clearLeadingZeroes() {
+        while (head && head->coefficient == 0 && head->next) {
+            NodeTerm* temp = head; 
+            head = head->next;     
+            delete temp;           
+            --degree;             
+        }
+        
+        // Handle the edge case for a polynomial of just zero
+        if (!head || (head->coefficient == 0 && !head->next)) {
+            degree = 0;
+        }
+    }
+
+    // Clear ending zeroes
     void Polynomial::clearEndingZeroes() {
         NodeTerm* current = head;
         NodeTerm* previous = nullptr;
@@ -184,44 +163,43 @@ namespace linkedPolynomial {
 
     // Member Operators
     Polynomial& Polynomial::operator+=(const Polynomial& other) {
-        Polynomial rhs (other);
-        if(rhs.isEmpty()){ return *this;} 
+        Polynomial rhs(other);
+        if (rhs.isEmpty()) { 
+            return *this; 
+        } 
         
-        else if(this->isEmpty() && !rhs.isEmpty()){ //A is empty, B is not empty
-            Polynomial newPoly = Polynomial(rhs);
-            return newPoly;
-        }  //Now we can assume none of them are empty
+        if (this->isEmpty() && !rhs.isEmpty()) { // A is empty, B is not empty
+            *this = rhs;
+            clearLeadingZeroes(); // Clear leading zeroes after assignment
+            return *this;
+        }  
+
         const Polynomial* higher;
         const Polynomial* lower;
 
-        if(this->degree > rhs.degree){ //set higher/lower by checking degrees
+        if (this->degree > rhs.degree) { // Set higher/lower by checking degrees
             higher = this;
             lower = &rhs;
         } else {
             higher = &rhs;
             lower = this;
         }
-        if(!higher || !lower){ //Error catching
-            cerr << "They are null." << endl;
-            return *this;
-        }
+
         NodeTerm* current = higher->head;
         int countIters = (higher->degree - lower->degree);
 
-        for(int i = 0; i < countIters; ++i){ current = current->next; }
+        for (int i = 0; i < countIters; ++i) { 
+            current = current->next; 
+        }
 
         NodeTerm* lowerCurr = lower->head;
-        while(current){
+        while (current) {
             current->coefficient += lowerCurr->coefficient; 
             current = current->next;
-            lowerCurr = lowerCurr->next; }
-        
-        clearEndingZeroes();           
-        const Polynomial* result = higher;
+            lowerCurr = lowerCurr->next; 
+        }
+        clearLeadingZeroes(); // Ensure no leading zeroes 
         *this = *higher;
-        NodeTerm* current1 = this->head;
-
-        while(current1){ current1 = current1->next;}
         return *this;
     }
 
@@ -262,35 +240,27 @@ namespace linkedPolynomial {
     }
 
     bool operator==(const Polynomial& lhs, const Polynomial& rhs) {
-        
         Polynomial::NodeTerm* iter1 = lhs.head;
-        Polynomial::NodeTerm* iter2 = lhs.head; //RHS, BUT IT BREAKS AT THE FIRST == alskdfjas;dlkfjasd;lfkjasd;flkasdjf;alskdfjasd;lkfjasd;lfkasdjf;ladskj
+        Polynomial::NodeTerm* iter2 = rhs.head;
 
-        while(iter1->coefficient == 0){
-            iter1 = iter1->next;
-        }
-        while(iter2->coefficient == 0){
-            iter2 = iter2->next;
-        }
-        while(iter1 && iter2){
-
-            if(iter1->coefficient != iter2->coefficient){
-                return false;
+        // Compare each term of the two polynomials
+        while (iter1 && iter2) {
+            if (iter1->coefficient != iter2->coefficient) {
+                return false; // Coefficients don't match
             }
             iter1 = iter1->next;
             iter2 = iter2->next;
         }
 
-       if(iter1 || iter2){
-        return false;
-       }
-
-       return true;
+        // If one list is longer than the other, they're not equal
+        return iter1 == nullptr && iter2 == nullptr;
     }
 
     Polynomial operator+(const Polynomial& lhs, const Polynomial& rhs) {
         Polynomial addedPoly = Polynomial(lhs);  
-        return addedPoly += rhs; 
+        addedPoly += rhs;
+        addedPoly.clearLeadingZeroes(); // Ensure no leading zeroes 
+        return addedPoly;
     }
 
     bool operator!=(const Polynomial& lhs, const Polynomial& rhs) {
