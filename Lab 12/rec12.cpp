@@ -168,7 +168,7 @@ public:
         for(size_t i = 0; i < index; ++i){
             ++iterator;
         }
-        return *iterator;
+        return *iterator; 
     }
 
 
