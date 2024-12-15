@@ -11,7 +11,22 @@ using namespace std;
 
 class Performer{
     public:
+
+    Performer(const string& n) : name(n) {}
+    
     virtual void perform() const = 0;
+
+    bool getJobStatus() const {
+        return has_job;
+    }
+
+    bool hireMe() {
+        has_job = true;
+    }
+
+    private:
+
+    string name;
     bool has_job = false;
 
 };
@@ -21,11 +36,11 @@ class Company{
         Company() {}
 
         bool hire(Performer& performer){
-            if(performer.has_job){
+            if(performer.getJobStatus()){
                 return false;
             } else {
                 performers.push_back(&performer);
-                performer.has_job = true;
+                performer.hireMe();
                 return true;
             }
         }
@@ -42,7 +57,7 @@ class Company{
 
 class Actor : public Performer{
     public:
-    Actor(const string& n, const string& s) : name(n), script(s) {}
+    Actor(const string& n, const string& s) : Performer(n), script(s) {}
 
     void perform() const override {
         cout << "I am " << name << ". " << script << endl;
@@ -55,7 +70,7 @@ class Actor : public Performer{
 
 class Mime : public Performer{
     public:
-    Mime(const string& n) : name(n){}
+    Mime(const string& n) : Performer(n){}
 
     void perform() const override {
         cout << "(silence)" << endl;
