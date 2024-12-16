@@ -12,7 +12,7 @@ struct LessThan{
 
     LessThan(int n) : val(n) {}
 
-    bool operator()(int checker){
+    bool operator()(int checker) const{
         return checker < val;
     }
         int val;
@@ -108,6 +108,9 @@ friend bool operator!=(const Iterator& lhs, const Iterator&rhs){
 
 }
 
+friend bool operator==(const Iterator& lhs, const Iterator&rhs){
+    return lhs.current == rhs.current;}
+    
 public:
     Iterator(int* ptr) : current(ptr){}
 
@@ -115,11 +118,18 @@ public:
         return *current;
     }
 
+    //pre
     Iterator& operator++() {
         ++current;
 
         return *this;
+    }
 
+    //post
+    Iterator& operator++(int dummy){
+        Iterator temp = *this;
+        current++;
+        return temp;
     }
 
 private:

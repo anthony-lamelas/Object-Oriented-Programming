@@ -73,8 +73,8 @@ class University{
         }
 
        void security_check() const {
-            for(size_t i = 0; i < members.size(); ++i){
-                members[i]->check_security();
+            for(const Member* mem : members){
+               mem->check_security();
             }
        }
 
