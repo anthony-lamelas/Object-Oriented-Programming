@@ -161,7 +161,7 @@ using namespace std;
 //     Derived d;
 //     Base b;
 //     someFunc(d, d);  // Calls with two Derived objects
-// }
+}
 
 
 // class Parent {
