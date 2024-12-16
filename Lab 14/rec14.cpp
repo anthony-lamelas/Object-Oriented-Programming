@@ -99,23 +99,16 @@ bool palindrome(char* arr, int length){
 }
 
 //   Task 4 function:
-bool parity(int number, bool result = true){
+bool parity(int number){
 
     if (number < 0) throw invalid_argument("The integer is negative, this is not allowed.");
 
     if(number == 0){
-        return result;
+        return true;
     }
-    
-    int quotient = number / 2;
-    int remainder = number % 2;
+    //even returns true
 
-   if(remainder == 1){
-        result = !result;
-        return parity(quotient, result);
-   } 
-
-   return parity(quotient, result);
+    return (number%2 == 0) == parity(number/2);
 }
 
 

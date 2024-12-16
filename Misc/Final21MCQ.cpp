@@ -117,3 +117,130 @@ using namespace std;
 
 //     someFunc(e,d);
 // }
+
+
+// class Base {
+// public:
+//     virtual void foo(Base& b) { cout << "Base::foo(Base)\n"; }
+// };
+
+// class Derived: public Base {
+// public:
+//     void foo(Derived d) { cout << "Derived::foo(Derived)\n"; }
+// };
+
+// int main() {
+//     Derived der;
+//     Base base = der;       // line A
+//     base.foo(der);         // line B
+//     der.foo(base);         // line C
+// }
+
+
+// class B {
+// public:
+//     B(int val=0) : n() {}
+//     virtual void foo() const { cout << "B"; }
+// private:
+//     int n;
+// };
+
+// class A {
+// public:
+//     A(int val=0) : someB(val) {}
+//     void foo() { cout << "A"; }
+// private:
+//     B someB;
+// };
+
+// int main() {
+//     A a;
+//     a.foo();
+// }
+
+
+
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+
+// using namespace std;
+
+// int main() {
+//     vector<int> v { 6, 42, 28, 17, 16, 49 };
+//     cout << *find_if(v.begin() + 1, v.end(),
+//                      [](int val) { return val % 2 == 0; })
+//          << endl;
+// }
+
+
+// class Pet {
+// public:
+//     Pet(string name) : name(name) {}
+//     void display() { cout << name << ' '; }
+// protected:
+//     void setName(string name) { this->name = name; }
+// private:
+//     string name;
+// };
+
+// class Cat : public Pet {
+// public:
+//     Cat(string name) : Pet(name) {}
+// };
+
+// class Dog : public Pet {
+// public:
+//     Dog() : Pet("ruff") {}
+//     void setCatName(Cat& rhs) {
+//         rhs.setName("Mehitabel");   // A
+//     }
+//     void setDogName(Dog& rhs) {
+//         rhs.setName("Fido");        // B
+//     }
+// };
+
+// int main() {
+//     Cat felix("Felix");
+//     Dog fido;
+//     Dog rover;
+
+//     fido.setCatName(felix);
+//     felix.display();
+//     fido.setDogName(fido);
+//     fido.display();
+// }
+
+
+// #include <iostream>
+// using namespace std;
+
+// class Parent {
+// public:
+//     Parent(int x) : x(x) {}
+//     virtual void display() const {
+//         cout << "x:" << x << endl;
+//     }
+// private:
+//     int x;
+// };
+
+// class Child : public Parent {
+// public:
+//     Child(int y) : y(y) {}
+//     void display() const {
+//         cout << "y:" << y << endl;
+//     }
+// private:
+//     int y;
+// }; 
+
+// void someFunc(Parent& val) {
+//     val.display();
+// }
+
+// int main() {
+//     Child child(10);
+//     someFunc(child);
+// }
